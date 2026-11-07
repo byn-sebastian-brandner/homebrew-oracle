@@ -3,8 +3,8 @@ class InstantclientArm64Sqlplus < Formula
   desc "Oracle Instant Client SQLPlus for Apple Silicon"
   homepage "https://www.oracle.com/database/technologies/instant-client/macos-arm64-downloads.html"
 
-  url "https://download.oracle.com/otn_software/mac/instantclient/233023/instantclient-sqlplus-macos.arm64-23.3.0.23.09.dmg"
-  sha256 "9213a399a13101bdebcd613027fa385ef44c42bba2330f9480b16db0e1a7d676"
+  url "https://download.oracle.com/otn_software/mac/instantclient/2326200/instantclient-sqlplus-macos.arm64-23.26.2.0.0.dmg"
+  sha256 "c3b10537194a5267a3ed18d09fddae1f864191e0de25ad78042940bb82496294"
 
   option "with-basiclite", "Depend on instantclient-basiclite instead of instantclient-basic."
 
