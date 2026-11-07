@@ -3,8 +3,10 @@ class InstantclientArm64Tools < Formula
   desc "Oracle Instant Client Tools for Apple Silicon"
   homepage "https://www.oracle.com/database/technologies/instant-client/macos-arm64-downloads.html"
 
-  url "https://download.oracle.com/otn_software/mac/instantclient/2326200/instantclient-tools-macos.arm64-23.26.2.0.0.dmg"
+  url "https://download.oracle.com/otn_software/mac/instantclient/2326200/instantclient-tools-macos.arm64-23.26.2.0.0.dmg", using: :nounzip
   sha256 "7041d9165fe370cc4ce75985db1cf14fed217a8b5e3e2cfe9cce06963527b38d"
+
+  depends_on "sevenzip" => :build
 
   option "with-basiclite", "Depend on instantclient-basiclite instead of instantclient-basic."
 
@@ -12,6 +14,10 @@ class InstantclientArm64Tools < Formula
   depends_on "instantclient-arm64-basiclite" if build.with?("basiclite")
 
   def install
+    # Homebrew cannot mount DMGs inside its build sandbox (hdiutil attach fails
+    # with "Device not configured"), so extract the image with 7-Zip instead.
+    system Formula["sevenzip"].opt_bin/"7zz", "x", "-y", Dir["*.dmg"].first
+
     lib.install Dir["*.dylib"]
 
     bins = %w[impdp expdp exp imp wrc sqlldr]
